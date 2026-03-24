@@ -15,7 +15,7 @@ public class Main {
 
         while (!gameEnded) {
             drawBoard(board);
-            System.out.println("Luot cua nguoi choi" + player);
+            System.out.println("Luot cua nguoi choi " + player);
 
             int row = -1;
             int col = -1;
@@ -35,7 +35,24 @@ public class Main {
             }
 
             board[row][col]= player;
-            //in ra ket qua thang thua
+            if (checkWin(board, player)) {
+                drawBoard(board);
+                System.out.println("Chuc mung nguoi choi " + player);
+                gameEnded = true;
+
+            }
+            else if (checkDraw(board)) {
+                drawBoard(board);
+                System.out.println("DRAW");
+                gameEnded= true;
+            }
+            else {
+                if (player == 'x') {
+                    player = 'o';
+                } else {
+                    player = 'x';
+                }
+            }
         }
     }
     public static void drawBoard (char[][] board) {
@@ -59,7 +76,7 @@ public class Main {
     public static boolean checkDraw (char[][]board){
         for (int i=0;i<3;i++) {
             for (int j=0;j<3;j++) {
-                if (board[i][j] = '-') {
+                if (board[i][j] == '-') {
                     return false;
                 }
             }
